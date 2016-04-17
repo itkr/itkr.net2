@@ -1,0 +1,57 @@
+---
+- hosts: all
+  sudo: yes
+  vars:
+    yum_packages:
+        - zlib-devel
+        - bzip2-devel
+        - openssl-devel
+        - ncurses-devel
+        - sqlite-devel
+        - readline-devel
+        - tk-devel
+        - mysql-devel
+#         - "Development tools"
+  tasks:
+    - name: Add a new user
+      user: name=webapp
+    - name: Install yum packages
+      yum: name={{ item | quote }} state=latest
+      with_items: yum_packages
+
+- hosts: web
+  sudo: yes
+  vars:
+    yum_packages:
+        - httpd
+  tasks:
+    - name: Install yum packages
+      yum: name={{ item | quote }} state=latest
+      with_items: yum_packages
+    - name: start apache and enabled
+      service: name=httpd state=started enabled=yes
+#     - name: change owner
+#       file: dest=/var/www/html owner=vagrant recurse=yes
+#     - name: copy index.html
+#       copy: src=./index.html dest=/var/www/html/index.html owner=vagrant
+  handlers:
+    - name: restart apache
+      service: name=httpd state=restarted
+
+- hosts: db
+  sudo: yes
+  vars:
+    yum_packages:
+        - mysql-server
+        - MySQL-python
+  tasks:
+    - name: Install yum packages
+      yum: name={{ item | quote }} state=latest
+      with_items: yum_packages
+    - name: Start mysql and enbled
+      service: name=mysqld state=started enabled=yes
+    - name: Create a database
+      mysql_db: name=simpledjango state=present
+    - name: Create a user
+      mysql_user: name=simpledjango priv=simpledjango.*:ALL state=present
+#       mysql_user: name=dbuser password=dbpassword priv=mydb.*:ALL state=present
