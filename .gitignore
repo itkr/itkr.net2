@@ -1,0 +1,10 @@
+*.pyc
+*.pyo
+*.db
+.project
+.pydevproject
+.python-version
+.DS_Store
+.coverage
+local_settings.py
+/static
