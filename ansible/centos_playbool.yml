@@ -15,6 +15,8 @@
   tasks:
     - name: Add a new user
       user: name=webapp
+    - name: Add authorized_key
+      authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub) }}"
     - name: Install yum packages
       yum: name={{ item | quote }} state=latest
       with_items: yum_packages
