@@ -4,7 +4,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-WSGI_APPLICATION = 'simpledjango.wsgi.production.application'
+WSGI_APPLICATION = 'wsgi.production.application'
 
 
 # Database
@@ -13,7 +13,7 @@ WSGI_APPLICATION = 'simpledjango.wsgi.production.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'simpledjango',
+        'NAME': 'apps',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
