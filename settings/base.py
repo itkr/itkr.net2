@@ -52,10 +52,13 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'apps.urls'
 
+_template_dir = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), os.pardir, 'templates'))
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['templates', _template_dir],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
