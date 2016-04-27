@@ -4,7 +4,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-WSGI_APPLICATION = 'wsgi.production.application'
+WSGI_APPLICATION = 'cores.wsgi.production.application'
 
 
 # Database
