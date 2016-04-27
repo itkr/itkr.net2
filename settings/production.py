@@ -13,10 +13,10 @@ WSGI_APPLICATION = 'wsgi.production.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apps',
+        'NAME': 'simpledjango',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': '',
+        'PORT': '',
     }
 }
