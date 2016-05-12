@@ -36,6 +36,18 @@
 #       file: dest=/var/www/html owner=vagrant recurse=yes
 #     - name: copy index.html
 #       copy: src=./index.html dest=/var/www/html/index.html owner=vagrant
+
+    # Install Python. TODO: 冪等性
+    - name: Download Python
+      get_url: https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz dest=/var/tmp/Python-2.7.10.tgz
+    - name: Unarchive Python
+      unarchive: src=/var/tmp/Python-2.7.10.tgz dest=/var/tmp/Python-2.7.10 copy=no
+    - name: Install Python
+      command: {{ item }}
+      with_items:
+        - '/var/tmp/Python-2.7.10/configure CFLAGS=-fPIC --enable-shared --prefix=/usr/local/'
+        - 'make -I /var/tmp/Python-2.7.10/'
+        - 'make -I /var/tmp/Python-2.7.10/ install'
   handlers:
     - name: restart apache
       service: name=httpd state=restarted
