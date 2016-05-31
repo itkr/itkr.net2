@@ -50,7 +50,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'apps.urls'
+ROOT_URLCONF = 'modules.urls'
 
 _template_dir = os.path.abspath(
     os.path.join(os.path.dirname(__file__), os.pardir, 'templates'))
