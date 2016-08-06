@@ -1,0 +1,38 @@
+---
+#
+# 実行例
+# ansible-playbook make_centos.yml --ask-become-pass
+#
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_user: root
+  vars_files:
+    - vars/global.yml
+  roles:
+    - yum
+    - python
+    - ssh
+    - iptables
+
+- hosts: db
+  gather_facts: no
+  become: yes
+  become_user: root
+  vars_files:
+    - vars/global.yml
+  roles:
+    - mysql
+
+- hosts: web
+  gather_facts: no
+  become: yes
+  become_user: root
+  vars_files:
+    - vars/global.yml
+  roles:
+    - python_opt
+    - httpd
+    - mod_wsgi
+    - deploy
+    - extra

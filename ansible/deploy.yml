@@ -1,0 +1,12 @@
+---
+#
+# 実行例
+# ansible-playbook deploy.yml
+#
+- hosts: all
+  gather_facts: no
+  become: no
+  vars_files:
+    - vars/global.yml
+  roles:
+    - deploy

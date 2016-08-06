@@ -1,0 +1,6 @@
+---
+- name: Copy activate script
+  template: >
+    src=etc/activate.sh.j2
+    dest=/home/webapp/activate_{{ project_name }}.sh
+  become: no

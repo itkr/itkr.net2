@@ -1,0 +1,4 @@
+---
+working_dir: /var/tmp/python/default
+python_version: 2.7.10
+creates_python_dir: /usr/local

@@ -1,0 +1,4 @@
+---
+working_dir: /var/tmp/python/opt
+python_version: 2.7.11
+creates_python_dir: /opt/local/python{{ python_version }}

@@ -1,0 +1,4 @@
+---
+working_dir: /var/tmp/mod_wsgi
+mod_wsgi_version: 4.2.8
+builder_python: /usr/local/bin/python

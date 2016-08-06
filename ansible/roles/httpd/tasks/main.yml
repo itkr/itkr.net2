@@ -1,0 +1,13 @@
+---
+- name: Set httpd config
+  lineinfile: >
+    dest=/etc/httpd/conf/httpd.conf
+    state=present
+    regexp={{ item.regexp }}
+    line={{ item.line }}
+  with_items:
+    - {regexp: "^ServerTokens", line: "ServerTokens ProductOnly"}
+    - {regexp: "^ServerSignature", line: "ServerSignature Off"}
+    - {regexp: "^#?NameVirtualHost", line: "NameVirtualHost *:80"}
+  notify: Restart httpd
+  

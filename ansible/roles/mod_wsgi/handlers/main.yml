@@ -1,0 +1,6 @@
+---
+- name: Update ld config
+  command: ldconfig
+
+- name: Restart httpd
+  service: name=httpd state=restarted enabled=yes

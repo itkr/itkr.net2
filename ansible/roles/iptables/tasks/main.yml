@@ -1,0 +1,5 @@
+---
+# iptablesモジュールでもいいかも
+- name: Set firewall
+  copy: src=etc/sysconfig/iptables dest=/etc/sysconfig/iptables
+  notify: Restart iptables

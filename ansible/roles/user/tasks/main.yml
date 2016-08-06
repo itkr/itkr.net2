@@ -1,0 +1,11 @@
+---
+- name: Add a new user
+  user: name=webapp password={{ user_password }} groups=wheel
+- name: Add authorized_key
+  authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+- name: enalbe sudo
+  lineinfile: >
+    dest=/etc/sudoers
+    state=present
+    regexp="^#\s+%wheel\s+ALL=\(ALL\)\s+ALL"
+    line="%wheel ALL=(ALL) ALL"

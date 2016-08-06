@@ -1,0 +1,47 @@
+---
+- name: Create tmp directory
+  file: path={{ working_dir }}/Python-{{ python_version }} state=directory
+
+- name: Download Python
+  get_url: >
+    url=https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+    dest={{ working_dir }}/Python-{{ python_version }}.tgz
+
+- name: Unarchive Python
+  unarchive: >
+    src={{ working_dir }}/Python-{{ python_version }}.tgz
+    dest={{ working_dir }}
+    copy=no
+    creates={{ creates_python_dir }}/bin/python
+  environment:
+    LANG: C
+    LC_ALL: C
+    LC_MESSAGES: C
+
+- name: Install Python
+  command: >
+    {{ item }}
+    chdir={{ working_dir }}/Python-{{ python_version }}
+    creates={{ creates_python_dir }}/bin/python
+  with_items:
+    - ./configure CFLAGS=-fPIC --enable-shared --prefix={{ creates_python_dir }}
+    - make
+    - make install
+
+- name: Link Python lib
+  file: >
+    src={{ creates_python_dir }}/lib/libpython2.7.so.1.0
+    dest=/lib64/libpython2.7.so.1.0
+    state=link
+
+- name: Download PIP
+  get_url: url=https://bootstrap.pypa.io/get-pip.py dest={{ working_dir }}/get-pip.py
+
+- name: Install PIP
+  command: >
+    {{ creates_python_dir }}/bin/python {{ working_dir }}/get-pip.py
+    creates={{ creates_python_dir }}/bin/pip
+
+- name: Install Virtualenv
+  become_method: su
+  pip: name=virtualenv

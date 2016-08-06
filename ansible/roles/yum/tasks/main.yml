@@ -1,0 +1,6 @@
+---
+- name: Update yum packages
+  yum: name=* state=latest
+- name: Install yum packages
+  yum: name={{ item | quote }} state=latest
+  with_items: "{{ yum_packages }}"

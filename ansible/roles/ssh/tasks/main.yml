@@ -1,0 +1,18 @@
+---
+- name: Set ssh config
+  lineinfile: >
+    dest=/etc/ssh/sshd_config
+    state=present
+    regexp={{ item.regexp }}
+    line={{ item.line }}
+  with_items:
+    - {regexp: "^PasswordAuthentication", line: "PasswordAuthentication no"}
+    - {regexp: "^PermitRootLogin", line: "PermitRootLogin no"}
+  notify: Restart sshd
+
+- name: Set language
+  lineinfile: >
+    dest=/etc/sysconfig/i18n
+    state=present
+    regexp="^LANG"
+    line="LANG=\"ja_JP.UTF-8\""

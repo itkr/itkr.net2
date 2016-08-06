@@ -1,13 +1,6 @@
-<html>
-<head>
-<title>Simple Django Project</title>
-</head>
-<body>
-<h1>Simple Django Project</h1>
-<h2>TestView</h2>
-<ul>
-<li><a href="{% url 'index' %}">IndexView</a>
-<li><a href="{% url 'test' %}">TestView</a>
-</ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% include 'root/parts/header.html' %}
+<h1>Test.html</h1>
+{% endblock %}

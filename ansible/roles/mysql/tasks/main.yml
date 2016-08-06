@@ -1,0 +1,19 @@
+- name: Install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - mysql-server
+
+- name: Copy my.cnf
+  copy: >
+    src=etc/my.cnf
+    dest=/etc/my.cnf
+  notify: Restart mysqld
+
+- name: Create a database
+  mysql_db: name={{ db_name }} state=present
+
+- name: Create a user
+  mysql_user: >
+    name={{ db_user }}
+    priv=*.*:ALL
+    state=present

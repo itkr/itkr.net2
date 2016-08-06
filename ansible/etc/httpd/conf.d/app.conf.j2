@@ -1,0 +1,19 @@
+<VirtualHost *:80>
+    ServerName {{ site_domain }}
+    ErrorLog /var/log/httpd/{{ project_name }}.error_log
+    CustomLog /var/log/httpd/{{ project_name }}.access_log combined
+    AddDefaultCharset UTF-8
+
+    WSGIDaemonProcess {{ project_name }} python-path={{ virtualenv_python }}/lib/python2.7/site-packages
+    WSGIScriptAlias / {{ project_root }}/wsgi/production.py
+
+    <Directory "{{ project_root }}">
+        #Options ExecCGI
+        AllowOverride All
+        WSGIProcessGroup {{ project_name }}
+        WSGIApplicationGroup %{GLOBAL}
+    </Directory>
+
+    Alias /static/admin {{ virtualenv_python }}/lib/python2.7/site-packages/django/contrib/admin/static/admin
+    Alias /static {{ project_root }}/statics/
+</VirtualHost>

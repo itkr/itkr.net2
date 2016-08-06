@@ -1,0 +1,53 @@
+---
+- name: Create tmp directory
+  file: path={{ working_dir }}/mod_wsgi-{{ mod_wsgi_version }} state=directory
+
+- name: Download mod_wsgi
+  get_url: >
+    url=https://github.com/GrahamDumpleton/mod_wsgi/archive/{{ mod_wsgi_version }}.tar.gz
+    dest={{ working_dir }}/mod_wsgi-{{ mod_wsgi_version }}.tar.gz
+
+- name: Unarchive mod_wsgi
+  unarchive: >
+    src={{ working_dir }}/mod_wsgi-{{ mod_wsgi_version }}.tar.gz
+    dest={{ working_dir }}
+    copy=no
+    creates=/etc/httpd/modules/mod_wsgi.so
+  environment:
+    LANG: C
+    LC_ALL: C
+    LC_MESSAGES: C
+
+- name: Install Python
+  command: >
+    {{ item }}
+    chdir={{ working_dir }}/mod_wsgi-{{ mod_wsgi_version }}
+    creates=/etc/httpd/modules/mod_wsgi.so
+  with_items:
+    - ./configure --with-python={{ builder_python }}
+    - make
+    - make install
+
+- name: Set ld config
+  lineinfile: >
+    dest=/etc/ld.so.conf
+    line=/usr/local/lib
+    state=present
+  notify: Update ld config
+
+- name: Copy wsgi.conf
+  copy: >
+    src=etc/httpd/conf.d/wsgi.conf
+    dest=/etc/httpd/conf.d/wsgi.conf
+  notify: Restart httpd
+
+- name: Copy app.conf
+  template: >
+    src=etc/httpd/conf.d/app.conf.j2
+    dest=/etc/httpd/conf.d/{{ item }}.conf
+  notify: Restart httpd
+  with_items:
+    - "{{ project_name }}"
+
+- name: Chmod home
+  file: path={{ project_root }}/../ mode=701 state=directory

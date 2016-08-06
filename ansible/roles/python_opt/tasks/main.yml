@@ -1,0 +1,29 @@
+---
+- name: Create tmp directory
+  file: path={{ working_dir }}/Python-{{ python_version }} state=directory
+
+- name: Download Python
+  get_url: >
+    url=https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+    dest={{ working_dir }}/Python-{{ python_version }}.tgz
+
+- name: Unarchive Python
+  unarchive: >
+    src={{ working_dir }}/Python-{{ python_version }}.tgz
+    dest={{ working_dir }}
+    copy=no
+    creates={{ creates_python_dir }}/bin/python
+  environment:
+    LANG: C
+    LC_ALL: C
+    LC_MESSAGES: C
+
+- name: Install Python
+  command: >
+    {{ item }}
+    creates={{ creates_python_dir }}/bin/python
+    chdir={{ working_dir }}/Python-{{ python_version }}
+  with_items:
+    - ./configure --prefix={{ creates_python_dir }}
+    - make
+    - make install

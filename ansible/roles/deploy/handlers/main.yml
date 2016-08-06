@@ -1,0 +1,3 @@
+---
+- name: Touch WSGI file
+  file: path={{ deploy_root }}/wsgi/production.py state=touch

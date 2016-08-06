@@ -1,0 +1,4 @@
+---
+virtualenv_base_python: /opt/local/python2.7.10/bin/python
+loaddata_list:
+#  - "{{ deploy_root }}/data/root/test.json"

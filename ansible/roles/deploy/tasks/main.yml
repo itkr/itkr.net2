@@ -1,0 +1,56 @@
+---
+# 通常は705で良い
+# ここにsqliteのファイルを置く場合は705
+- name: Make src directory
+  file: >
+    path={{ deploy_root }}
+    state=directory
+    owner=webapp
+    group=webapp
+    mode=705
+  become: no
+
+- name: Pull src code
+  git: >
+    repo={{ deploy_repo }}
+    dest={{ deploy_root }}
+    version={{ deploy_branch }}
+    accept_hostkey=yes
+  notify: Touch WSGI file
+  become: no
+
+- name: Copy settings
+  template: >
+    src=etc/settings/{{ env }}.py.j2
+    dest={{ project_root }}/settings/{{ env }}.py
+  notify: Touch WSGI file
+  become: no
+
+- name: Create Application virtualenv
+  pip: >
+    virtualenv={{ virtualenv_python }}
+    requirements={{ deploy_root }}/requirements.txt
+    virtualenv_python={{ virtualenv_base_python }}
+  become: no
+
+- name: Migrate
+  django_manage: >
+    command="migrate --run-syncdb"
+    settings={{ django_settings }}
+    app_path={{ deploy_root }}
+    virtualenv={{ virtualenv_python }}
+  become: no
+
+- name: Load data
+  django_manage: >
+    command=loaddata
+    fixtures={{ item }}
+    settings={{ django_settings }}
+    app_path={{ deploy_root }}
+    virtualenv={{ virtualenv_python }}
+  become: no
+  with_items: "{{ loaddata_list }}"
+
+# SQLiteを使う場合のみ
+#- name: Chmod db
+#  file: path={{ deploy_root }}/db.sqlite3 mode=707
