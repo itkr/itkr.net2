@@ -9,6 +9,9 @@
     dest=/etc/my.cnf
   notify: Restart mysqld
 
+- name: Restart mysqld
+  service: name=mysqld state=started enabled=yes
+
 - name: Create a database
   mysql_db: name={{ db_name }} state=present
 

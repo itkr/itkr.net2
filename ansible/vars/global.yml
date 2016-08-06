@@ -1,7 +1,7 @@
 site_domain: example.com
 project_name: simpledjango
 project_root: /home/webapp/{{ project_name }}
-db_name: {{ project_name }}
+db_name: simpledjango
 db_user: root
 virtualenv_python: /home/webapp/.virtualenvs/{{ project_name }}
 deploy_root: /home/webapp/{{ project_name }}

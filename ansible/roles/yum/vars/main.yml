@@ -12,3 +12,4 @@ yum_packages:
   - gcc
   - mysql-devel
   - MySQL-python
+  - git

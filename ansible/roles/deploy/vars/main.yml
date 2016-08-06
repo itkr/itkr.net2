@@ -1,4 +1,4 @@
 ---
-virtualenv_base_python: /opt/local/python2.7.10/bin/python
+virtualenv_base_python: /opt/local/python2.7.11/bin/python
 loaddata_list:
   - "{{ deploy_root }}/data/photo/photo.json"

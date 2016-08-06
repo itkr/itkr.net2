@@ -10,4 +10,5 @@
     - {regexp: "^ServerSignature", line: "ServerSignature Off"}
     - {regexp: "^#?NameVirtualHost", line: "NameVirtualHost *:80"}
   notify: Restart httpd
-  
+- name: Start httpd
+  service: name=httpd state=started enabled=yes
