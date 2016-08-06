@@ -1,0 +1,34 @@
+[
+{
+    "model": "photo.photo",
+    "pk": 1,
+    "fields": {
+        "title": "Title 1",
+        "path": "1.jpg"
+    }
+},
+{
+    "model": "photo.photo",
+    "pk": 2,
+    "fields": {
+        "title": "Title 2",
+        "path": "2.jpg"
+    }
+},
+{
+    "model": "photo.photo",
+    "pk": 3,
+    "fields": {
+        "title": "Title 3",
+        "path": "3.jpg"
+    }
+},
+{
+    "model": "photo.photo",
+    "pk": 4,
+    "fields": {
+        "title": "Title 4",
+        "path": "4.jpg"
+    }
+}
+]
