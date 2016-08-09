@@ -49,5 +49,22 @@
   with_items:
     - "{{ project_name }}"
 
+# TODO: 書く場所考える
 - name: Chmod home
-  file: path={{ project_root }}/../ mode=701 state=directory
+  file: >
+    path={{ project_root }}/../
+    mode=701
+    state=directory
+    owner=webapp
+    group=webapp
+
+# TODO: 書く場所考える
+# 通常は705で良い
+# ここにsqliteのファイルを置く場合は705
+- name: Make src directory
+  file: >
+    path={{ deploy_root }}
+    state=directory
+    owner=webapp
+    group=webapp
+    mode=705

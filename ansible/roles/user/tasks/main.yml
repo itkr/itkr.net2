@@ -2,13 +2,21 @@
 - name: Add a new user
   user: name=webapp password={{ user_password | password_hash('sha512') }} groups=wheel
 
-# Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!
-# このエラーが出た時に使用
-#- name: Install libselinux-python
-#  yum: name=libselinux-python state=latest
-
 - name: Add authorized_key
   authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  ignore_errors: True
+  register: authorized_key_result
+
+# Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!
+# このエラーが出た時にlibselinux-pythonをインストール
+- name: Install libselinux-python
+  yum: name=libselinux-python state=latest
+  when: authorized_key_result | failed
+
+# libselinux-pythonをインストールした後もう一度実行
+- name: Add authorized_key retry
+  authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+  when: authorized_key_result | failed
 
 - name: enalbe sudo
   lineinfile: >
