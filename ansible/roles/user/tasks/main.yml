@@ -1,6 +1,6 @@
 ---
 - name: Add a new user
-  user: name=webapp password={{ user_password }} groups=wheel
+  user: name=webapp password={{ user_password | password_hash('sha512') }} groups=wheel
 - name: Add authorized_key
   authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 - name: enalbe sudo
