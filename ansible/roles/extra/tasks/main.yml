@@ -4,3 +4,6 @@
     src=etc/activate.sh.j2
     dest=/home/webapp/activate_{{ project_name }}.sh
   become: no
+
+- name: Restart httpd
+  service: name=httpd state=restarted

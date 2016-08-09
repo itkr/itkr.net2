@@ -4,7 +4,7 @@
 # ansible-playbook make_centos.yml --ask-become-pass
 #
 - hosts: all
-  gather_facts: no
+  gather_facts: yes
   become: yes
   become_user: root
   vars_files:

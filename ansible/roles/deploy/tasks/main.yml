@@ -1,4 +1,5 @@
 ---
+- debug: var=deploy_root
 # 通常は705で良い
 # ここにsqliteのファイルを置く場合は705
 - name: Make src directory

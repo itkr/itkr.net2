@@ -1,11 +1,18 @@
 ---
 - name: Add a new user
   user: name=webapp password={{ user_password | password_hash('sha512') }} groups=wheel
+
+# Aborting, target uses selinux but python bindings (libselinux-python) aren't installed!
+# このエラーが出た時に使用
+#- name: Install libselinux-python
+#  yum: name=libselinux-python state=latest
+
 - name: Add authorized_key
   authorized_key: user=webapp key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
 - name: enalbe sudo
   lineinfile: >
     dest=/etc/sudoers
     state=present
-    regexp="^#\s+%wheel\s+ALL=\(ALL\)\s+ALL"
+    regexp="^%wheel\s+ALL=\(ALL\)\s+ALL"
     line="%wheel ALL=(ALL) ALL"

@@ -43,5 +43,7 @@
     creates={{ creates_python_dir }}/bin/pip
 
 - name: Install Virtualenv
-  become_method: su
   pip: name=virtualenv
+#  become_method: su
+  environment:
+    PATH: "{{ creates_python_dir }}/bin:{{ ansible_env.PATH }}"
