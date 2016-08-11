@@ -2,6 +2,7 @@
 *.pyc
 *.pyo
 *.db
+*.retry
 .project
 .pydevproject
 .python-version
