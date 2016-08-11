@@ -32,27 +32,27 @@
             month = date.getMonth() + 1,
             day = date.getDate();
         if(arguments.length < 2) {
-        	baseFormat = '{year}.{month}.{day}';
+            baseFormat = '{year}.{month}.{day}';
         }
         month = (month < 10 ? "0" + month : month);
         day = (day < 10 ? "0" + day : day)
         
         return format(baseFormat, {
-        	'year': year,
-        	'month': month,
-        	'day': day
+            'year': year,
+            'month': month,
+            'day': day
         });
     }
 
     function makeEntryHTML(entry) {
         var date = formatDate(new Date(entry.publishedDate)),
             img = entry.content.match(/src="(.*?)"/igm),
-			categories = '';
+            categories = '';
         img = img === null ? DEFAULT_IMAGE : img[0].replace('src=', '').split('"').join('');
 
         if (entry.categories.length > 0) {
             categories += entry.categories;
-            categories += '　|　'
+            categories += '  |  '
         }
 
         return format(BASE_ENTRY_HTML, {
@@ -60,14 +60,14 @@
             'title': entry.title,
             'date': date,
             'link': entry.link,
-			'categories': categories,
+            'categories': categories,
             'summary': entry.content.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '').substring(0, 100) + '...'
         })
     }
 
     function init() {
         var suffix = formatDate(new Date(), '{year}{month}{day}'),
-        	feed = new global.google.feeds.Feed(URL + '?' + suffix),
+            feed = new global.google.feeds.Feed(URL + '?' + suffix),
             html = "",
             i = 0;
         feed.setNumEntries(NUM_ENTRIES);
