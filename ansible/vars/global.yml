@@ -1,8 +1,6 @@
 site_domain: example.com
 project_name: simpledjango
 project_root: /home/webapp/{{ project_name }}
-db_name: simpledjango
-db_user: root
 virtualenv_python: /home/webapp/.virtualenvs/{{ project_name }}
 deploy_root: /home/webapp/{{ project_name }}
 #deploy_repo: git@github.com:itkr/simpledjango.git
@@ -10,5 +8,12 @@ deploy_repo: https://github.com/itkr/simpledjango.git
 deploy_branch: master
 env: production
 django_settings: settings.{{ env }}
-admin_name: "My Name"
-admin_email: mail@example.com
+admin:
+  name: "My Name"
+  email: mail@example.com
+db:
+  name: simpledjango
+  user: root
+  password:
+  host:
+  port:

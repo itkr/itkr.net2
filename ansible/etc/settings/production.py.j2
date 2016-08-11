@@ -13,16 +13,16 @@ WSGI_APPLICATION = 'wsgi.{{ env }}.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '{{ db_name }}',
-        'USER': '{{ db_user }}',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'NAME': '{{ db.name }}',
+        'USER': '{{ db.user }}',
+        'PASSWORD': '{{ db.password }}',
+        'HOST': '{{ db.host }}',
+        'PORT': '{{ db.port }}',
     }
 }
 
 ADMINS = (
-    ('{{ admin_name }}', '{{ admin_email }}'),
+    ('{{ admin.name }}', '{{ admin.email }}'),
 )
 
 MANAGERS = ADMINS

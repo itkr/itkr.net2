@@ -13,10 +13,10 @@
   service: name=mysqld state=started enabled=yes
 
 - name: Create a database
-  mysql_db: name={{ db_name }} state=present
+  mysql_db: name={{ db.name }} state=present
 
 - name: Create a user
   mysql_user: >
-    name={{ db_user }}
+    name={{ db.user }}
     priv=*.*:ALL
     state=present
