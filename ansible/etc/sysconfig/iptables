@@ -12,4 +12,5 @@
 -A SERVICES -p tcp --dport 22 -j ACCEPT
 -A SERVICES -p tcp --dport 80 -j ACCEPT
 -A SERVICES -p tcp --dport 443 -j ACCEPT
+-A SERVICES -p tcp --dport 3306 -j ACCEPT
 COMMIT

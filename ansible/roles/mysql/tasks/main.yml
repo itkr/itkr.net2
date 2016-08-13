@@ -18,5 +18,8 @@
 - name: Create a user
   mysql_user: >
     name={{ db.user }}
-    priv=*.*:ALL
+    password={{ db.password }}
+    append_privs=yes
+    priv=*.*:ALL,GRANT
+    host="%"
     state=present

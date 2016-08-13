@@ -3,7 +3,7 @@
 # 実行例
 # ansible-playbook deploy.yml
 #
-- hosts: all
+- hosts: web
   gather_facts: no
   become: no
   vars_files:
