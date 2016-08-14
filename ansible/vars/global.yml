@@ -14,6 +14,6 @@ admin:
 db:
   name: simpledjango
   user: root
-  password:
-  host:
-  port:
+  password: root
+  host: 192.168.43.53
+  port: 3306
