@@ -70,9 +70,7 @@ class Pager(object):
 
 
 class PagerMixin(object):
-    """
-    pager機能を追加する
-    """
+    """pager機能を追加する."""
 
     @classmethod
     def get_pager(cls, page_length=20, order_by=None, attrs={}):

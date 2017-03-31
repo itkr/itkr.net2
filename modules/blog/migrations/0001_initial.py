@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+
 import modules.tools.djangopager.pager
 
 
@@ -17,7 +18,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Blog',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(default=b'', max_length=30)),
                 ('url', models.CharField(default=b'', max_length=255)),
                 ('link', models.CharField(default=b'', max_length=255)),
@@ -28,10 +30,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Entry',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('blog_id', models.PositiveIntegerField(default=0)),
                 ('title', models.CharField(default=b'', max_length=255)),
-                ('entry_id', models.CharField(default=b'', max_length=255, unique=True)),
+                ('entry_id', models.CharField(
+                    default=b'', max_length=255, unique=True)),
                 ('url', models.CharField(default=b'', max_length=255, unique=True)),
                 ('published', models.DateTimeField(blank=True, null=True)),
                 ('summary', models.TextField(default=b'')),
@@ -42,7 +46,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='EntryTag',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(default=b'', max_length=255)),
                 ('entry_id', models.CharField(max_length=255)),
             ],
@@ -50,7 +55,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tag',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(default=b'', max_length=255, unique=True)),
                 ('count', models.PositiveIntegerField(default=0)),
             ],

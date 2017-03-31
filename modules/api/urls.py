@@ -6,5 +6,5 @@ from .views import RSSView
 PREFIX = 'api'
 
 urlpatterns = [
-   url(r'^rss$', RSSView.as_view(), name=PREFIX),
+    url(r'^rss$', RSSView.as_view(), name=PREFIX),
 ]
