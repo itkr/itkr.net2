@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title_sub %}
+Blog
+{% endblock %}
+
+{% block content %}
+<div class="posts">
+  <h1 class="content-subhead">Tag list</h1>
+  <section class="post">
+    <header class="post-header">
+      <h2 class="post-title"><a href="{{ entry.url }}" target="_new">ブログタグ一覧</a></h2>
+    </header>
+    <div class="post-description">
+      {% for tag in tags %}
+      <a class="post-category{% if tag.style %} {{ tag.style }}{% endif %}"
+        href="{% url 'blog_tag' tag.id %}">{{ tag.name }} ({{ tag.count }})</a>
+      {% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

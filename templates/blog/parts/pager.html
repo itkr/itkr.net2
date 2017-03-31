@@ -1,0 +1,21 @@
+<div class="paginator pure-menu pure-menu-open pure-menu-horizontal">
+	<ul class="pure-paginator">
+		{% if paginator.has_prev %}
+			<li><a class="pure-button prev"
+				href="{{ link_base }}/{{ paginator.prev_page }}">&#171;</a></li>
+		{% endif %}
+
+		{% for page in paginator.list %}
+			{% if page == paginator.current_page %}
+				<li><a class="pure-button pure-button-active" href="#">{{ page }}</a></li>
+			{% else %}
+				<li><a class="pure-button" href="{{ link_base }}/{{ page }}">{{  page }}</a></li>
+			{% endif %}
+		{% endfor %}
+		
+		{% if paginator.has_next %}
+			<li><a class="pure-button next"
+				href="{{ link_base }}/{{ paginator.next_page }}">&#187;</a></li>
+		{% endif %}
+	</ul>
+</div>

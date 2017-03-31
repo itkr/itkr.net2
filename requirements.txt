@@ -1,3 +1,7 @@
 django==1.9.6
 MySQL-python
+PyRSS2Gen
+beautifulsoup4
+feedparser
+pytz
 # passlib

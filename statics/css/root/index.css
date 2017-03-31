@@ -1,0 +1,110 @@
+#top {
+	/*height: 260px;*/
+	height: 220px;
+	margin: 0 auto 40px auto;
+	padding: 15px 0 15px 0;
+}
+
+#links {
+	display: block;
+	float: left;
+	width: 360px;
+}
+
+#downloads {
+	display: block;
+	float: left;
+	width: 540px;
+	text-align: center;
+	position: relative;
+}
+
+.download_button{
+	position: absolute;
+	top: 100px;
+	left: 100px;
+}
+
+.download_button_raw{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#menu {
+	margin: auto auto 40px auto;
+	
+}
+
+.others{
+	display:block;
+	margin-top:430px;
+	padding:15px 0 15px 0;
+	margin:auto auto 20px auto;
+	/*background-color:#993366;*/
+}
+
+.others li{
+	border-bottom:1px dotted #999999;
+	margin-bottom:10px;
+	padding-bottom:10px;
+}
+
+.others h2{
+	color:#666666;
+	margin-bottom:15px;
+}
+
+.others p{
+	font-size:90%;
+	margin-bottom:20px;
+}
+
+.others dt{
+	font-size:110%;
+}
+
+.others dd{
+	font-size:90%;
+}
+
+.card {
+	width: 280px;
+	height: 250px;
+	float: left;
+	margin-right: 30px;
+	margin-bottom: 40px;
+}
+
+
+.card dl a{
+	font-style:normal;
+}
+
+.card dd{
+	text-align:justify;
+	text-justify:inter-ideograph;
+	font-size:90%;
+	text-indent:0;
+}
+
+.card img, .card canvas {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 130px;
+	margin: auto;
+	border: 1px solid #cccccc;
+	border-color:#eeeeee #cccccc #cccccc #eeeeee;
+}
+
+.card img:hover, .card canvas:hover {
+	opacity: 0.70;
+	filter: alpha(opacity=70);
+	-moz-opacity: 0.70;
+	-ms-filter: "alpha(opacity=70)";
+}
+
+.last{
+	margin-right: 0px;
+}

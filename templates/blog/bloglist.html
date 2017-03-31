@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title_sub %}
+Blog
+{% endblock %}
+
+{% block content %}
+
+<div class="posts">
+  {% for blog in blogs %}
+    {% include 'blog/parts/bloginformation.html' with blog=blog only %}
+  {% endfor %}
+</div>
+
+{% endblock %}

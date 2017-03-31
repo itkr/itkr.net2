@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<h1 class="content-subhead">Blog information</h1>
+<section class="post">
+	<header class="post-header">
+		<img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48"
+		    width="48" src="{% static 'img/icon/blog/' %}{{ blog.id }}.gif">
+		<h2 class="post-title">{{ blog.title }}</h2>
+		<p class="post-meta">
+			<a href="{{ blog.link }}" target="_new">{{ blog.link }}</a> | <a
+				href="{% url 'blog_feature' blog.id 1 %}">記事一覧</a>
+		</p>
+	</header>
+	<div class="post-description">
+		<p>{{ blog.description }}</p>
+	</div>
+	<div class="new-posts">
+		<h3>最近のエントリ</h3>
+		<ul>
+			{% for entry in blog.entries %}
+			<li>
+				<a href="{% url 'blog_entrydetail' entry.id %}">
+					{{ entry.title }} ({{ entry.published|date:'Y/n/j' }})<!-- H:i --></a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</section>

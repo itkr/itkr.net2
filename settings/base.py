@@ -20,13 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '79@f4nu(qma!^0!#ag0a26%6cmniv(&k%)0p+t1w4-fv@xsuz^'
+SECRET_KEY = 'pgg#=9ot=of4cvj5ma0!)9$2qxlj90df!@xqh3(n74!pw65kux'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SITE_DOMAIN = 'itkr.net'
 
 # Application definition
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'modules.photo',
+    'modules.blog',
 ]
 
 MIDDLEWARE_CLASSES = [

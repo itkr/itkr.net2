@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title_sub %} {{ entry.title }} {% endblock %}
+{% block content %}
+
+<!-- A wrapper for all the blog posts -->
+<div class="posts">
+
+
+  {% if blog %}
+    {% include 'blog/parts/bloginformation.html' with blog=blog only %}
+  {% endif %}
+
+  <h1 class="content-subhead">Blog Entry &nbsp;({% if entry.published %}{{ entry.published }}{% else %}No date{% endif %})</h1>
+
+  <!-- A single blog post -->
+  <section class="post">
+    <header class="post-header">
+      <img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48"
+        width="48"
+        src="{% static 'img/icon/blog/' %}{{ entry.blog.id }}.gif">
+      <h2 class="post-title">
+        <a href="{{ entry.url }}" target="_new">{{ entry.title }}</a>
+      </h2>
+      <p class="post-meta">
+        <a href="{% url 'blog_feature' entry.blog_id %}" class="post-author">
+        {{ entry.blog.title }}</a> | {% for tag in entry.tags %} <a
+          class="post-category{% if tag.style %} {{ tag.style }}{% endif %}"
+          href="{% url 'blog_tag' tag.id %}">{{ tag.name }}</a> {% endfor %}
+      </p>
+    </header>
+    <div class="post-description">
+      <p>{{ entry.escaped_summary|safe }}</p>
+      <p class="more">
+        <a href="{{ entry.url }}" target="_new">元の記事へ</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title_sub %}{{ subtitle }}{% endblock %}
+{% block content %}
+<!-- A wrapper for all the blog posts -->
+<div class="posts">
+  {% if blog %}
+  {% include 'blog/parts/bloginformation.html' with blog=blog only %}
+  {% endif %}
+  {% for entry in entries %}
+  <h1 class="content-subhead">Blog Entry&nbsp;({% if entry.published %}{{ entry.published }}{% else %}No date{% endif %})</h1>
+  <!-- A single blog post -->
+  <section class="post">
+    <header class="post-header">
+      <img class="post-avatar" alt="Tilo Mitra&#x27;s avatar" height="48" width="48" src="{% static 'img/icon/blog/' %}{{ entry.blog.id }}.gif">
+      <h2 class="post-title"><a href="{% url 'blog_entrydetail' entry.id %}">{{ entry.title }}</a></h2>
+      <p class="post-meta">
+        <a href="{% url 'blog_feature' entry.blog_id %}" class="post-author">{{ entry.blog.title }}</a>
+        |
+        {% for tag in entry.tags %}
+          <a class="post-category{% if tag.style %} {{ tag.style }}{% endif %}" href="{% url 'blog_tag' tag.id %}">{{ tag.name }}</a>
+        {% endfor %}
+      </p>
+    </header>
+    <div class="post-description">
+      <p>
+        {{ entry.descliption }} ...
+      </p>
+      <p class="more">
+        <a href="{% url 'blog_entrydetail' entry.id %}">詳細を見る</a>
+        | <a href="{{ entry.url }}" target="_new">元の記事へ</a>
+      </p>
+      <div class="post-images pure-g">
+        {% if entry.img %}
+        <div class="pure-u-1 pure-u-md-1-2">
+          <a href="{{ entry.img }}"><img alt="{{ entry.title }}" class="pure-img-responsive" src="{{ entry.img }}"></a>
+        </div>
+        {% endif %}
+        {% if entry.img2 %}
+        <div class="pure-u-1 pure-u-md-1-2">
+          <a href="{{ entry.img2 }}"><img alt="{{ entry.title }}" class="pure-img-responsive" src="{{ entry.img2 }}"></a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+  {% endfor %}
+</div>
+<!-- Pager -->
+{% include 'blog/parts/pager.html' with paginator=paginator link_base=paginator_link only %}
+{% endblock %}
