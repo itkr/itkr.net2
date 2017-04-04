@@ -113,7 +113,7 @@ class Entry(ModelWrapper, PagerMixin):
     @cached_property
     def _summary_soup(self):
         #         return BeautifulSoup(self.summary, "lxml")
-        return BeautifulSoup(self.summary)
+        return BeautifulSoup(self.summary, 'html.parser')
 
     @cached_property
     def escaped_summary(self):

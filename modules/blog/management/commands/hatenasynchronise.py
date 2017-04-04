@@ -32,7 +32,7 @@ class Command(BaseCommand):
     def get_entry(self, entry_url):
         html = urllib2.urlopen(entry_url)
 #         soup = BeautifulSoup(html, "lxml")
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, 'html.parser')
 
         entity_id_base = soup.find('article',
                                    class_='autopagerize_page_element').get('data-uuid')
@@ -56,7 +56,7 @@ class Command(BaseCommand):
     def get_entries(self, entry_list_url):
         html = urllib2.urlopen(entry_list_url)
 #         soup = BeautifulSoup(html, "lxml")
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, 'html.parser')
 
         return [self.get_entry(tag.get('href'))
                 for tag in soup.select('.hatena-star-permalink')]

@@ -32,7 +32,7 @@ class Command(BaseCommand):
     def get_entry(self, url):
         html = urllib2.urlopen(url)
 #         soup = BeautifulSoup(html, "lxml")
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, 'html.parser')
 
         index = 1
 
@@ -53,7 +53,7 @@ class Command(BaseCommand):
     def get_entries(self, entry_list_url):
         html = urllib2.urlopen(entry_list_url)
 #         soup = BeautifulSoup(html, "lxml")
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html, 'html.parser')
 
         return [self.get_entry(tag.a.get('href'))
                 for tag in soup.select('.entry_header')
