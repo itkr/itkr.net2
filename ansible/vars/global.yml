@@ -1,19 +1,12 @@
-site_domain: example.com
-project_name: simpledjango
+site_domain: itkr.net
+project_name: itkr.net2
 project_root: /home/webapp/{{ project_name }}
 virtualenv_python: /home/webapp/.virtualenvs/{{ project_name }}
 deploy_root: /home/webapp/{{ project_name }}
-#deploy_repo: git@github.com:itkr/simpledjango.git
-deploy_repo: https://github.com/itkr/simpledjango.git
+deploy_repo: git@github.com:itkr/itkr.net2.git
 deploy_branch: master
 env: production
 django_settings: settings.{{ env }}
 admin:
-  name: "My Name"
-  email: mail@example.com
-db:
-  name: simpledjango
-  user: root
-  password: root
-  host: 192.168.43.53
-  port: 3306
+  name: itkr
+  email: itkrst@gmail.com
