@@ -19,12 +19,6 @@ Vagrant.configure(2) do |config|
     node.vm.network :private_network, ip: "192.168.43.52"
   end
 
-  config.vm.define "db" do |node|
-    node.vm.box = "bento/centos-6.7"
-	node.vm.hostname = "db"
-	node.vm.network :private_network, ip: "192.168.43.53"
-  end
-
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
